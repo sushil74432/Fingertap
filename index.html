@@ -1,0 +1,119 @@
+<html>
+<head>
+	<title>Fingertap Mania</title>
+	<link rel="icon" href="fingertapping.jpg">
+	<script type="text/javascript" src= "https://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<style type="text/css">
+	#container{
+		margin: -30px;
+		padding: 0px;
+		width:120%;
+		height:120%;
+	}
+	#keys{
+		width: 600px;
+		padding: 20px;
+		margin-left:350px;
+		margin-top:40px;
+		border: solid 2px;
+	}
+</style>
+
+
+
+<body oncontextmenu="return false">
+	<div id="container">
+		<div id="keys" onKeyDown="counter()" onKeyUp ="dismiss()">
+			
+			<h2 style = "text-align:center; color:red;">Fingertap Mania</h2>
+			<img src="fingertapping.jpg" style = "width:50%; margin-left: 130px;">
+			<h3 style = "text-align:center;">Track how fast can you tap your fingers on Keyboard.</h3>
+			<button id="help" onClick = "help()" style = "margin-left: 210px;">What's This?</button>
+			<button id="enter_pattern" onClick = "enterPattern()" style = "margin-left: 210px;">Enter Your Key Pattern</button>
+			<p id="notice" style = "color:red"><strong></strong></p>
+		</div>
+	</div>	
+
+
+
+
+	<script type="text/javascript">
+	var pattern1 = 0;
+	var length = 0;
+	function enterPattern() {
+		pattern1 = prompt("Enter The Keystroke Pattern");
+		pattern = pattern1.split('');
+		//alert(pattern[0]);
+		var x = pattern[0].keyCode;
+		length = pattern1.length;
+		//alert(x);
+
+		//alert (pattern);
+		$('#notice').html("<strong><ul><li>The Count Will Begin as soon as you enter into the textbox below. You Have 5 Seconds.</li><li>If You miss the pattern, It won't be included in the count</li> <li>Goto the TextBox below once you are ready and start </li></strong><li><input id='input' type='text' onFocus='countdown()'></li><li><div id='timer'></div></li></ul>")
+
+
+	}
+	
+		function countdown(){
+			//alert("countdown called")
+			var count=5;
+			var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+			function timer(){
+				//alert("timer started")
+				count=count-1;
+		  		if (count <= 0){
+		     		clearInterval(counter);
+		     		//counter ended, do something here
+		     		$('#timer').html("<h1 id='timeup'>Your Time Has Ended <button id='play' onClick = 'play()' style = 'margin-top: -70px; margin-left: -300px;'>Play Again</button></h1>");
+		     		$('#input').readOnly = true;
+		     		$('#input').blur();
+   		    		$('#input').hide();
+   					keydown();
+		     		return;
+		  		}
+		  		//Do code for showing the number of seconds here
+		  		$('#timer').html(count);
+			}
+		}
+
+
+		function keydown(){
+			//alert("keydown called");
+			var key = $("#input").val();
+			//alert(key);
+			//alert(pattern1);
+			
+			// the g in the regular expression says to search the whole string 
+			// rather than just find the first occurrence
+			var re = new RegExp(pattern1, 'g');  //creating a regexp object to send variable 're' as parameter in the                     										.match() function
+			var countr = (key.match(re) || []).length;
+     		$('#input').val("");
+
+			alert("Your rate of fingertapping in "+length+" character long pattern category is "+countr+" per 5 Seconds");
+
+
+
+			// v=key.length;
+			// alert(v);
+		}
+
+		
+	</script>
+
+	<script type="text/javascript">
+		function help(){
+			alert("This is a simple interactive application made for fun. First you have to enter the pattern in which you will be tapping your fingers. Enter the pattern in the keys of your keyboard as per your ease (For Example if I want to play with my left hand, I will enter the pattern 'asdf' and for right hand I will enter'lkjh'). Then goto the textfield and your time starts. Tap the fingres as fast you can. Best Of Luck!")
+		}
+
+		function play(){
+    		$('#input').readOnly = false;
+    		$('#input').show();
+    		$('#timeup').hide();
+    		$('#play').hide();
+
+		}
+	</script>
+
+</body>
+</html>
