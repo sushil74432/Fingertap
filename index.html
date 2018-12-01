@@ -55,63 +55,58 @@
 
 	}
 	
-		function countdown(){
-			//alert("countdown called")
-			var count=5;
-			var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
-			function timer(){
-				//alert("timer started")
-				count=count-1;
-		  		if (count <= 0){
-		     		clearInterval(counter);
-		     		//counter ended, do something here
-		     		$('#timer').html("<h1 id='timeup'>Your Time Has Ended <button id='play' onClick = 'play()' style = 'margin-top: -70px; margin-left: -300px;'>Play Again</button></h1>");
-		     		$('#input').readOnly = true;
-		     		$('#input').blur();
-   		    		$('#input').hide();
-   					keydown();
-		     		return;
-		  		}
-		  		//Do code for showing the number of seconds here
-		  		$('#timer').html(count);
-			}
+	function countdown() {
+		//alert("countdown called")
+		var count=5;
+		var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+		function timer(){
+			//alert("timer started")
+			count=count-1;
+	  		if (count <= 0){
+	     		clearInterval(counter);
+	     		//counter ended, do something here
+	     		$('#timer').html("<h1 id='timeup'>Your Time Has Ended <button id='play' onClick = 'play()' style = 'margin-top: -70px; margin-left: -300px;'>Play Again</button></h1>");
+	     		$('#input').readOnly = true;
+	     		$('#input').blur();
+   	    		$('#input').hide();
+   				keydown();
+	     		return;
+	  		}
+	  		//Do code for showing the number of seconds here
+	  		$('#timer').html(count);
 		}
+	}
 
 
-		function keydown(){
-			//alert("keydown called");
-			var key = $("#input").val();
-			//alert(key);
-			//alert(pattern1);
-			
-			// the g in the regular expression says to search the whole string 
-			// rather than just find the first occurrence
-			var re = new RegExp(pattern1, 'g');  //creating a regexp object to send variable 're' as parameter in the                     										.match() function
-			var countr = (key.match(re) || []).length;
+	function keydown() {
+		//alert("keydown called");
+		var key = $("#input").val();
+		//alert(key);
+		//alert(pattern1);
+		
+		// the g in the regular expression says to search the whole string 
+		// rather than just find the first occurrence
+		var re = new RegExp(pattern1, 'g');  //creating a regexp object to send variable 're' as parameter in the .match() function
+		var countr = (key.match(re) || []).length;
      		$('#input').val("");
-
-			alert("Your rate of fingertapping in "+length+" character long pattern category is "+countr+" per 5 Seconds");
-
-
-
-			// v=key.length;
-			// alert(v);
-		}
+		alert("Your rate of fingertapping in "+length+" character long pattern category is "+countr+" per 5 Seconds");
+		// v=key.length;
+		// alert(v);
+	}
 
 		
 	</script>
 
 	<script type="text/javascript">
-		function help(){
-			alert("This is a simple interactive application made for fun. First you have to enter the pattern in which you will be tapping your fingers. Enter the pattern in the keys of your keyboard as per your ease (For Example if I want to play with my left hand, I will enter the pattern 'asdf' and for right hand I will enter'lkjh'). Then goto the textfield and your time starts. Tap the fingres as fast you can. Best Of Luck!")
+		function help() {
+			alert("This is a simple interactive application made for fun. First you have to enter the pattern in which you will be tapping your fingers. Enter the pattern in the keys of your keyboard as per your ease (For Example if I want to play with my left hand, I will enter the pattern 'asdf' or for right hand I will enter'lkjh'). Then goto the textfield and your time starts. Tap the fingres as fast you can. Best Of Luck!")
 		}
 
-		function play(){
-    		$('#input').readOnly = false;
-    		$('#input').show();
-    		$('#timeup').hide();
-    		$('#play').hide();
-
+		function play() {
+    			$('#input').readOnly = false;
+    			$('#input').show();
+    			$('#timeup').hide();
+    			$('#play').hide();
 		}
 	</script>
 
